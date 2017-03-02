@@ -1,2 +1,2 @@
 # Code-Examples
-Used for example code
+Used for examples of my code from several different projects.
