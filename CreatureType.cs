@@ -30,7 +30,7 @@ public class CreatureType : MonoBehaviour {
 
 	float breedTimer;
 	bool readyToBreed;
-	bool itsTimeToFuck;
+	bool itsTimeToBreed;
 
 	NavMeshAgent myNav;
 
@@ -53,16 +53,15 @@ public class CreatureType : MonoBehaviour {
 			activeMate = null;
 		}
 		if (readyToBreed == true && activeMate != null) {
-			itsTimeToFuck = true;
+			itsTimeToBreed = true;
 			myNav.SetDestination (activeMate.transform.position);
 		} else {
-			itsTimeToFuck = false;
+			itsTimeToBreed = false;
 		}
 	}
 
 	IEnumerator Breed () {
-		yield return new WaitUntil (() => itsTimeToFuck == true);
-		Debug.Log ("ITSFUCKTIME");
+		yield return new WaitUntil (() => itsTimeToBreed == true);
 		GetComponent<CreatureWander> ().enabled = false;
 		myNav.SetDestination (activeMate.transform.position);
 		yield return new WaitForSeconds (timeToBreed);
@@ -72,7 +71,7 @@ public class CreatureType : MonoBehaviour {
 			Debug.Log ("BIRTH");
 		}
 		readyToBreed = false;
-		itsTimeToFuck = false;
+		itsTimeToBreed = false;
 		breedTimer = 0;
 		GetComponent<CreatureWander> ().enabled = true;
 	}
